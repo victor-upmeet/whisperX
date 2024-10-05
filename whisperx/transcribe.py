@@ -71,6 +71,9 @@ def cli():
     parser.add_argument("--highlight_words", type=str2bool, default=False, help="(not possible with --no_align) underline each word as it is spoken in srt and vtt")
     parser.add_argument("--segment_resolution", type=str, default="sentence", choices=["sentence", "chunk"], help="(not possible with --no_align) the maximum number of characters in a line before breaking the line")
 
+    parser.add_argument("--max_new_tokens", type=optional_int, default=None, help="Maximum number of new tokens to generate per-chunk. If not set, the maximum will be set by the default max_length.")
+    parser.add_argument("--hallucination_silence_threshold", type=optional_float, default=None, help="When word_timestamps is True, skip silent periods longer than this threshold (in seconds) when a possible hallucination is detected")
+
     parser.add_argument("--threads", type=optional_int, default=0, help="number of threads used by torch for CPU inference; supercedes MKL_NUM_THREADS/OMP_NUM_THREADS")
 
     parser.add_argument("--hf_token", type=str, default=None, help="Hugging Face Access Token to access PyAnnote gated models")
@@ -151,6 +154,9 @@ def cli():
         "initial_prompt": args.pop("initial_prompt"),
         "suppress_tokens": [int(x) for x in args.pop("suppress_tokens").split(",")],
         "suppress_numerals": args.pop("suppress_numerals"),
+        "max_new_tokens": args.pop("max_new_tokens"),
+        "clip_timestamps": None,
+        "hallucination_silence_threshold": args.pop("hallucination_silence_threshold")
     }
 
     writer = get_writer(output_format, output_dir)
