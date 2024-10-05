@@ -19,15 +19,27 @@ class SingleCharSegment(TypedDict):
     end: float
     score: float
 
+class Word(TypedDict):
+    start: float
+    end: float
+    word: str
+    probability: float
 
 class SingleSegment(TypedDict):
     """
     A single segment (up to multiple sentences) of a speech.
     """
 
+    id: int
+    seek: int
     start: float
     end: float
     text: str
+    tokens: List[int]
+    avg_logprob: float
+    compression_ratio: float
+    no_speech_prob: float
+    words: Optional[List[Word]]
 
 
 class SingleAlignedSegment(TypedDict):
