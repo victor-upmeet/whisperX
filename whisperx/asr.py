@@ -225,15 +225,15 @@ class FasterWhisperPipeline(Pipeline):
                 text = text[0]
             segments.append(
                 {
-                    "id": vad_segments[idx]['id'],
-                    "seek": vad_segments[idx]['seek'],
+                    "id": out['id'],
+                    "seek": out['seek'],
                     "text": text,
                     "start": round(vad_segments[idx]['start'], 3),
                     "end": round(vad_segments[idx]['end'], 3),
-                    "tokens": vad_segments[idx]['tokens'],
-                    "avg_logprob": vad_segments[idx]['avg_logprob'],
-                    "compression_ratio": vad_segments[idx]['compression_ratio'],
-                    "no_speech_prob": vad_segments[idx]['no_speech_prob']
+                    "tokens": out['tokens'],
+                    "avg_logprob": out['avg_logprob'],
+                    "compression_ratio": out['compression_ratio'],
+                    "no_speech_prob": out['no_speech_prob']
                 }
             )
 
