@@ -1,3 +1,4 @@
+import json
 import os
 import warnings
 from typing import List, Union, Optional, NamedTuple
@@ -221,6 +222,9 @@ class FasterWhisperPipeline(Pipeline):
                 percent_complete = base_progress / 2 if combined_progress else base_progress
                 print(f"Progress: {percent_complete:.2f}%...")
             text = out['text']
+
+            json.dump(out)
+
             if batch_size in [0, 1, None]:
                 text = text[0]
             segments.append(
