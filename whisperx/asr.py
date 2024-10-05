@@ -223,7 +223,7 @@ class FasterWhisperPipeline(Pipeline):
                 print(f"Progress: {percent_complete:.2f}%...")
             text = out['text']
 
-            json.dump(out)
+            json.dumps(out)
 
             if batch_size in [0, 1, None]:
                 text = text[0]
